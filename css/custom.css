@@ -1,0 +1,38 @@
+#nav-subtitle{
+    margin-left: 8px;
+}
+
+.title a{
+    font-size: 26px;
+    font-weight: 600;
+    color: #42464c;
+}
+
+.subtitle.date{
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.content-header{
+    margin-bottom: 30px;
+}
+
+.content-header > .title{
+    margin-bottom: 0px;
+}
+
+.subtitle.tags > .subtitle.is-6{
+    font-weight: 600;
+}
+
+.content{
+    font-size: 18px;
+}
+
+.single-content-header{
+    margin-bottom: 50px;
+}
+
+.single-content-header > .single-title{
+    font-size: 40px;
+}
