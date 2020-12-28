@@ -2,6 +2,9 @@
 run:
 	hugo server
 
+build:
+	hugo -d ../kyawmyintthein.github.io
+
 deploy:
 	hugo -d ../kyawmyintthein.github.io
 	git add .
