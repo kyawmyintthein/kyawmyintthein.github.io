@@ -8,7 +8,7 @@ baseURL = "https://kyawmyintthein.github.io/"
 copyright = "© {2021}"
 
 # Add your Disqus shortname here.
-# disqusShortname = "Kyaw"
+disqusShortname = "Kyaw"
 
 # Add your Google Analytics identifier: UA-XXXXXXXX-X
 # googleAnalytics = "" 
