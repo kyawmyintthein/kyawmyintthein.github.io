@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Kyaw Myint Thein | My Journey</title>
-    <link>https://kyawmyintthein.github.io/</link>
-    <description>Recent content on Kyaw Myint Thein | My Journey</description>
+    <title>me on Kyaw Myint Thein | My Journey</title>
+    <link>https://kyawmyintthein.github.io/tags/me/</link>
+    <description>Recent content in me on Kyaw Myint Thein | My Journey</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© {2021}</copyright>
-    <lastBuildDate>Sun, 27 Dec 2020 09:19:29 -0400</lastBuildDate><atom:link href="https://kyawmyintthein.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 27 Dec 2020 09:19:29 -0400</lastBuildDate><atom:link href="https://kyawmyintthein.github.io/tags/me/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Welcome To Blog</title>
       <link>https://kyawmyintthein.github.io/blog/welcome-to-blog/</link>
