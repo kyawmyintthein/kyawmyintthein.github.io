@@ -1,12 +1,19 @@
 
 run:
-	hugo server
+	hugo server --disableFastRender
 
 build:
-	hugo -d ../kyawmyintthein.github.io
+	hugo --minify
 
+clean:
+	rm -rf public/
+
+# Local development with drafts
+dev:
+	hugo server --buildDrafts --buildFuture --disableFastRender
+
+# Deploy using GitHub Actions (manual trigger)
 deploy:
-	hugo -d ../kyawmyintthein.github.io
 	git add .
-	git commit -m "release new changes"
+	git commit -m "Update content and deploy"
 	git push origin master
