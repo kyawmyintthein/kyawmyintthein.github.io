@@ -41,14 +41,33 @@ jobs:
       - name: Build
         run: |
           echo "Building Hugo site with timestamp: $(date)"
+          echo "Deployment timestamp: $(date)" > static/deployment-check.txt
+          echo "Commit: ${{ github.sha }}" >> static/deployment-check.txt
+          echo "Run number: ${{ github.run_number }}" >> static/deployment-check.txt
           hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/" --cleanDestinationDir
           echo "Build completed at $(date)"
+          echo "Generated files:"
+          ls -la ./public/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
+          retention-days: 1
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          timeout: 600000
+          error_count: 10
+          reporting_interval: 5000
+
+      - name: Verify deployment
+        run: |
+          echo "Deployment completed!"
+          echo "Site URL: ${{ steps.deployment.outputs.page_url }}"
+          echo "Waiting 30 seconds for propagation..."
+          sleep 30
+          echo "Testing site availability..."
+          curl -I "${{ steps.deployment.outputs.page_url }}" || echo "Site not immediately available"
