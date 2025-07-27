@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master  # Set a branch to deploy
-  pull_request:
 
 jobs:
   deploy:
@@ -37,6 +36,13 @@ jobs:
 
       - name: Build
         run: hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+
+      - name: List build output
+        run: |
+          echo "Contents of public directory:"
+          ls -la ./public/
+          echo "Sample of index.html:"
+          head -20 ./public/index.html || echo "No index.html found"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
