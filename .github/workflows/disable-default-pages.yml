@@ -1,0 +1,16 @@
+# Disable automatic GitHub Pages deployment
+# This repository uses a custom Hugo deployment workflow
+# The automatic Jekyll-based deployment should be disabled
+
+name: Disable Default Pages
+on:
+  push:
+    branches:
+      - master
+jobs:
+  disable:
+    runs-on: ubuntu-latest
+    if: false  # This workflow will never run
+    steps:
+      - name: Disabled
+        run: echo "This workflow is disabled"
