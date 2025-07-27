@@ -34,8 +34,16 @@ jobs:
         id: pages
         uses: actions/configure-pages@v4
 
+      - name: Clean and prepare build
+        run: |
+          rm -rf ./public
+          echo "Cleaned public directory"
+
       - name: Build
-        run: hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+        run: |
+          echo "Building Hugo site..."
+          hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/" --cleanDestinationDir
+          echo "Build completed at $(date)"
 
       - name: List build output
         run: |
