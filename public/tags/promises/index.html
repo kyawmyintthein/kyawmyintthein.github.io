@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Promises | Kyaw Myint Thein | Tech Blog</title>
+<meta name="keywords" content="">
+<meta name="description" content="Senior Software Engineer sharing insights on distributed systems, data infrastructure, and large-scale applications">
+<meta name="author" content="Kyaw Myint Thein">
+<link rel="canonical" href="http://localhost:1313/tags/promises/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.8fe10233a706bc87f2e08b3cf97b8bd4c0a80f10675a143675d59212121037c0.css" integrity="sha256-j&#43;ECM6cGvIfy4Is8&#43;XuL1MCoDxBnWhQ2ddWSEhIQN8A=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/tags/promises/index.xml">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/tags/promises/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="http://localhost:1313/tags/promises/">
+  <meta property="og:site_name" content="Kyaw Myint Thein | Tech Blog">
+  <meta property="og:title" content="Promises">
+  <meta property="og:description" content="Senior Software Engineer sharing insights on distributed systems, data infrastructure, and large-scale applications">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Promises">
+<meta name="twitter:description" content="Senior Software Engineer sharing insights on distributed systems, data infrastructure, and large-scale applications">
+
+</head>
+
+<body class="list" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Kyaw Myint Thein | Tech Blog (Alt + H)">Kyaw Myint Thein | Tech Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/blog/" title="Blog">
+                    <span>Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main"> 
+<header class="page-header"><div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/tags/">Tags</a></div>
+  <h1>
+    Promises
+    <a href="/tags/promises/index.xml" title="RSS" aria-label="RSS">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" height="23">
+        <path d="M4 11a9 9 0 0 1 9 9" />
+        <path d="M4 4a16 16 0 0 1 16 16" />
+        <circle cx="5" cy="19" r="1" />
+      </svg>
+    </a>
+  </h1>
+</header>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Modern JavaScript: Async/Await Patterns You Should Know
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Introduction Async/await revolutionized how we write asynchronous JavaScript code. Since its introduction in ES2017, it has become the preferred way to handle promises. Let’s explore essential patterns that will make your async code cleaner and more robust.
+Basic Async/Await 1// Traditional promise chains 2function fetchUserData(userId) { 3 return fetch(`/api/users/${userId}`) 4 .then(response =&gt; response.json()) 5 .then(user =&gt; { 6 return fetch(`/api/users/${userId}/posts`); 7 }) 8 .then(response =&gt; response.json()) 9 .then(posts =&gt; ({ user, posts })); 10} 11 12// Modern async/await 13async function fetchUserData(userId) { 14 const userResponse = await fetch(`/api/users/${userId}`); 15 const user = await userResponse.json(); 16 17 const postsResponse = await fetch(`/api/users/${userId}/posts`); 18 const posts = await postsResponse.json(); 19 20 return { user, posts }; 21} Error Handling Patterns 1. Try-Catch with Async/Await 1async function safeApiCall(url) { 2 try { 3 const response = await fetch(url); 4 5 if (!response.ok) { 6 throw new Error(`HTTP error! status: ${response.status}`); 7 } 8 9 return await response.json(); 10 } catch (error) { 11 console.error(&#39;API call failed:&#39;, error.message); 12 return null; // or throw a custom error 13 } 14} 2. Multiple Error Boundaries 1async function processUserOrder(userId, orderData) { 2 try { 3 // Validate user 4 const user = await validateUser(userId); 5 6 try { 7 // Process payment 8 const payment = await processPayment(orderData.payment); 9 10 try { 11 // Create order 12 const order = await createOrder(user.id, orderData, payment.id); 13 return { success: true, order }; 14 } catch (orderError) { 15 // Rollback payment if order creation fails 16 await refundPayment(payment.id); 17 throw orderError; 18 } 19 } catch (paymentError) { 20 throw new Error(`Payment failed: ${paymentError.message}`); 21 } 22 } catch (userError) { 23 throw new Error(`User validation failed: ${userError.message}`); 24 } 25} Parallel Execution Patterns 1. Promise.all for Parallel Operations 1// Sequential (slow) 2async function fetchUserDataSequential(userId) { 3 const user = await fetch(`/api/users/${userId}`).then(r =&gt; r.json()); 4 const posts = await fetch(`/api/users/${userId}/posts`).then(r =&gt; r.json()); 5 const comments = await fetch(`/api/users/${userId}/comments`).then(r =&gt; r.json()); 6 7 return { user, posts, comments }; 8} 9 10// Parallel (faster) 11async function fetchUserDataParallel(userId) { 12 const [user, posts, comments] = await Promise.all([ 13 fetch(`/api/users/${userId}`).then(r =&gt; r.json()), 14 fetch(`/api/users/${userId}/posts`).then(r =&gt; r.json()), 15 fetch(`/api/users/${userId}/comments`).then(r =&gt; r.json()) 16 ]); 17 18 return { user, posts, comments }; 19} 2. Promise.allSettled for Fault Tolerance 1async function fetchMultipleResources(urls) { 2 const results = await Promise.allSettled( 3 urls.map(url =&gt; fetch(url).then(r =&gt; r.json())) 4 ); 5 6 const successful = []; 7 const failed = []; 8 9 results.forEach((result, index) =&gt; { 10 if (result.status === &#39;fulfilled&#39;) { 11 successful.push({ url: urls[index], data: result.value }); 12 } else { 13 failed.push({ url: urls[index], error: result.reason }); 14 } 15 }); 16 17 return { successful, failed }; 18} Advanced Patterns 1. Async Iteration 1async function* fetchPaginatedData(baseUrl) { 2 let page = 1; 3 let hasMore = true; 4 5 while (hasMore) { 6 const response = await fetch(`${baseUrl}?page=${page}`); 7 const data = await response.json(); 8 9 yield data.items; 10 11 hasMore = data.hasNextPage; 12 page&#43;&#43;; 13 } 14} 15 16// Usage 17async function processAllData() { 18 for await (const batch of fetchPaginatedData(&#39;/api/data&#39;)) { 19 batch.forEach(item =&gt; console.log(item)); 20 } 21} 2. Retry Pattern with Exponential Backoff 1async function retryWithBackoff(fn, maxRetries = 3, baseDelay = 1000) { 2 for (let attempt = 1; attempt &lt;= maxRetries; attempt&#43;&#43;) { 3 try { 4 return await fn(); 5 } catch (error) { 6 if (attempt === maxRetries) { 7 throw error; 8 } 9 10 const delay = baseDelay * Math.pow(2, attempt - 1); 11 console.log(`Attempt ${attempt} failed, retrying in ${delay}ms`); 12 13 await new Promise(resolve =&gt; setTimeout(resolve, delay)); 14 } 15 } 16} 17 18// Usage 19const result = await retryWithBackoff(async () =&gt; { 20 const response = await fetch(&#39;/api/unreliable-endpoint&#39;); 21 if (!response.ok) throw new Error(&#39;Network error&#39;); 22 return response.json(); 23}); 3. Timeout Pattern 1function withTimeout(promise, milliseconds) { 2 const timeout = new Promise((_, reject) =&gt; 3 setTimeout(() =&gt; reject(new Error(&#39;Operation timed out&#39;)), milliseconds) 4 ); 5 6 return Promise.race([promise, timeout]); 7} 8 9// Usage 10async function fetchWithTimeout(url) { 11 try { 12 const response = await withTimeout(fetch(url), 5000); 13 return await response.json(); 14 } catch (error) { 15 if (error.message === &#39;Operation timed out&#39;) { 16 console.log(&#39;Request took too long&#39;); 17 } 18 throw error; 19 } 20} Performance Optimization 1. Lazy Loading with Async 1class DataLoader { 2 constructor() { 3 this.cache = new Map(); 4 } 5 6 async loadData(key) { 7 if (this.cache.has(key)) { 8 return this.cache.get(key); 9 } 10 11 const dataPromise = this.fetchData(key); 12 this.cache.set(key, dataPromise); 13 14 try { 15 const data = await dataPromise; 16 this.cache.set(key, data); // Replace promise with actual data 17 return data; 18 } catch (error) { 19 this.cache.delete(key); // Remove failed promise 20 throw error; 21 } 22 } 23 24 async fetchData(key) { 25 const response = await fetch(`/api/data/${key}`); 26 return response.json(); 27 } 28} 2. Batching Requests 1class RequestBatcher { 2 constructor(batchSize = 10, delay = 100) { 3 this.batchSize = batchSize; 4 this.delay = delay; 5 this.queue = []; 6 this.timeoutId = null; 7 } 8 9 async request(url) { 10 return new Promise((resolve, reject) =&gt; { 11 this.queue.push({ url, resolve, reject }); 12 13 if (this.queue.length &gt;= this.batchSize) { 14 this.processBatch(); 15 } else { 16 this.scheduleProcessing(); 17 } 18 }); 19 } 20 21 scheduleProcessing() { 22 if (this.timeoutId) return; 23 24 this.timeoutId = setTimeout(() =&gt; { 25 this.processBatch(); 26 }, this.delay); 27 } 28 29 async processBatch() { 30 if (this.timeoutId) { 31 clearTimeout(this.timeoutId); 32 this.timeoutId = null; 33 } 34 35 const batch = this.queue.splice(0, this.batchSize); 36 if (batch.length === 0) return; 37 38 try { 39 const urls = batch.map(item =&gt; item.url); 40 const responses = await Promise.allSettled( 41 urls.map(url =&gt; fetch(url).then(r =&gt; r.json())) 42 ); 43 44 batch.forEach((item, index) =&gt; { 45 const result = responses[index]; 46 if (result.status === &#39;fulfilled&#39;) { 47 item.resolve(result.value); 48 } else { 49 item.reject(result.reason); 50 } 51 }); 52 } catch (error) { 53 batch.forEach(item =&gt; item.reject(error)); 54 } 55 } 56} Common Pitfalls and Solutions 1. Sequential vs Parallel 1// ❌ Accidentally sequential 2async function processItems(items) { 3 const results = []; 4 for (const item of items) { 5 const result = await processItem(item); // Waits for each item 6 results.push(result); 7 } 8 return results; 9} 10 11// ✅ Parallel processing 12async function processItems(items) { 13 const promises = items.map(item =&gt; processItem(item)); 14 return Promise.all(promises); 15} 2. Error Handling in Loops 1// ❌ Stops on first error 2async function processItemsWithErrors(items) { 3 const results = []; 4 for (const item of items) { 5 try { 6 const result = await processItem(item); 7 results.push(result); 8 } catch (error) { 9 console.error(`Failed to process ${item}:`, error); 10 // Other items won&#39;t be processed 11 } 12 } 13 return results; 14} 15 16// ✅ Continues processing other items 17async function processItemsRobustly(items) { 18 const promises = items.map(async (item) =&gt; { 19 try { 20 return await processItem(item); 21 } catch (error) { 22 console.error(`Failed to process ${item}:`, error); 23 return null; // or some default value 24 } 25 }); 26 27 const results = await Promise.all(promises); 28 return results.filter(result =&gt; result !== null); 29} Testing Async Code 1// Jest example 2describe(&#39;Async functions&#39;, () =&gt; { 3 test(&#39;should fetch user data&#39;, async () =&gt; { 4 const mockUser = { id: 1, name: &#39;John&#39; }; 5 6 // Mock the fetch function 7 global.fetch = jest.fn().mockResolvedValue({ 8 ok: true, 9 json: jest.fn().mockResolvedValue(mockUser) 10 }); 11 12 const result = await fetchUserData(1); 13 14 expect(result).toEqual(mockUser); 15 expect(fetch).toHaveBeenCalledWith(&#39;/api/users/1&#39;); 16 }); 17 18 test(&#39;should handle errors gracefully&#39;, async () =&gt; { 19 global.fetch = jest.fn().mockRejectedValue(new Error(&#39;Network error&#39;)); 20 21 const result = await safeApiCall(&#39;/api/test&#39;); 22 23 expect(result).toBeNull(); 24 }); 25}); Conclusion Async/await has made JavaScript asynchronous programming much more readable and maintainable. Key takeaways:
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-01-05 16:00:00 +0800 +0800'>January 5, 2024</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;1356 words&nbsp;·&nbsp;Kyaw Myint Thein</footer>
+  <a class="entry-link" aria-label="post link to Modern JavaScript: Async/Await Patterns You Should Know" href="http://localhost:1313/blog/javascript-async-await-patterns/"></a>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>© 2024 Kyaw Myint Thein</span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

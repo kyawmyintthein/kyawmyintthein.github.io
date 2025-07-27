@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Programming on Kyaw Myint Thein | Tech Blog</title>
+    <link>http://localhost:1313/tags/programming/</link>
+    <description>Recent content in Programming on Kyaw Myint Thein | Tech Blog</description>
+    <generator>Hugo -- 0.148.1</generator>
+    <language>en-us</language>
+    <copyright>2024 Kyaw Myint Thein</copyright>
+    <lastBuildDate>Wed, 10 Jan 2024 14:30:00 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/programming/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go Error Handling: Best Practices and Patterns</title>
+      <link>http://localhost:1313/blog/golang-error-handling-best-practices/</link>
+      <pubDate>Wed, 10 Jan 2024 14:30:00 +0800</pubDate>
+      <guid>http://localhost:1313/blog/golang-error-handling-best-practices/</guid>
+      <description>Learn effective error handling patterns in Go, including custom errors, error wrapping, and best practices for building robust applications.</description>
+    </item>
+  </channel>
+</rss>

@@ -1,67 +1,116 @@
-# DO NOT REMOVE THIS
-theme = "hugo-theme-codex" 
-
-# Override these settings with your own
-title = "Kyaw Myint Thein | My Journey"
-languageCode = "en-us"
 baseURL = "https://kyawmyintthein.github.io/"
-copyright = "© {2021}"
+title = "Kyaw Myint Thein | Tech Blog"
+theme = "PaperMod"
+copyright = "© 2024 Kyaw Myint Thein"
+languageCode = "en-us"
+defaultContentLanguage = "en"
 
-# Add your Disqus shortname here.
-disqusShortname = "Kyaw"
-
-# Add your Google Analytics identifier: UA-XXXXXXXX-X
-# googleAnalytics = "" 
-
-# Optional params
+# Global parameters
 [params]
-  # Follow the Hugo date/time format reference here: 
-  # https://gohugo.io/functions/format/#gos-layout-string
-  dateFormat = "Jan 2 2006"
+  env = "production"
+  description = "Senior Software Engineer sharing insights on distributed systems, data infrastructure, and large-scale applications"
+  keywords = ["distributed-systems", "cassandra", "apache-iceberg", "kafka", "scala", "golang", "data-infrastructure", "myanmar"]
+  author = "Kyaw Myint Thein"
 
-  # Links to your social accounts, comment/uncomment as needed. Icons will be displayed for those specified.
-  # twitter = "https://twitter.com/<your handle>"
-  github = "https://github.com/kyawmyintthein"
-  email = "mailto:kyawmyintthein2020@gmail.com"
-  # facebook = "https://facebook.com/<your handle>"
-  # gitlab = "https://gitlab.com/<your handle>"
-  # instagram = "https://instagram.com/<your handle>"
-   linkedin = "https://www.linkedin.com/in/kyaw-myint-thein"
-  # youtube = "https://www.youtube.com/channel/<your channel>"
-  
-  # Titles for your icons (shown as tooltips), and also their display order.
-  # Currently, these icons are supported: 
-  #   "Twitter", "GitHub", "Email", "Facebook", "GitLab", "Instagram", "LinkedIn", "YouTube"
-  iconOrder = ["GitHub", "LinkedIn", "Email"]
+  # Theme settings
+  defaultTheme = "auto"
+  ShowReadingTime = true
+  ShowShareButtons = false
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowWordCount = true
+  ShowRssButtonInSectionTermList = true
+  UseHugoToc = true
+  disableSpecial1stPost = false
+  disableScrollToTop = false
+  comments = false
+  hidemeta = false
+  hideSummary = false
+  showtoc = true
+  tocopen = false
 
-  # Metadata for Twitter cards, defaults to params.twitter
-  # twitterSite = "@<your handle>"
-  # twitterAuthor = "@<your handle>"
+  # Social icons
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/kyawmyintthein"
 
-  # Set to true to display page title in table of contents in blog posts.
-  showPageTitleInTOC = true
+  [[params.socialIcons]]
+    name = "linkedin"
+    url = "https://www.linkedin.com/in/kyaw-myint-thein"
 
-# This disables Hugo's default syntax highlighting in favor
-# of prismjs. If you wish to use Hugo's default syntax highlighting
-# over prismjs, remove this. You will also need to remove the prismjs
-# vendor script in layouts/blog/single.html.
+  [[params.socialIcons]]
+    name = "email"
+    url = "mailto:kyawmyintthein2020@gmail.com"
+
+  # Profile mode with Burmese Gopher
+[params.profileMode]
+  enabled = true
+  title = "Kyaw Myint Thein (Joe)"
+  subtitle = "Senior Software Engineer specializing in large-scale distributed systems and data infrastructure"
+  imageUrl = "/images/burmese-gopher.png"
+  imageWidth = 160
+  imageHeight = 160
+  imageTitle = "Burmese Gopher - Joe's Avatar"
+
+  # Profile mode buttons
+  [[params.profileMode.buttons]]
+    name = "Blog"
+    url = "/blog"
+
+  [[params.profileMode.buttons]]
+    name = "About"
+    url = "/about"
+
+  [[params.profileMode.buttons]]
+    name = "Tags"
+    url = "/tags"
+
+  # Home info mode (disabled when profile mode is enabled)
+  [params.homeInfoParams]
+    Title = "Hi, I'm Kyaw Myint Thein 👋"
+    Content = "Senior Software Engineer specializing in large-scale distributed systems and data infrastructure. Sharing insights from building systems that serve hundreds of millions of users."
+
+# Navigation
+[[menu.main]]
+  name = "Home"
+  url = "/"
+  weight = 1
+
+[[menu.main]]
+  name = "Blog"
+  url = "/blog/"
+  weight = 2
+
+[[menu.main]]
+  name = "About"
+  url = "/about/"
+  weight = 3
+
+[[menu.main]]
+  name = "Tags"
+  url = "/tags/"
+  weight = 4
+
+# Markup configuration
 [markup]
   [markup.highlight]
+    style = "github"
     codeFences = true
-    
-  # Set to false to disallow raw HTML in markdown files
+    guessSyntax = true
+    lineNos = true
+    lineNumbersInTable = false
+    noClasses = false
+
   [markup.goldmark.renderer]
-      unsafe = true
+    unsafe = true
 
-# Controls the navigation
-[[menu.main]]
-  identifier = "about"
-  name = "About"
-  title = "About"
-  url = "/"
+# Taxonomies
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+  series = "series"
 
-[[menu.main]]
-  identifier = "blog"
-  name = "Blog"
-  title = "Blog"
-  url = "/blog"
+# Outputs
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
