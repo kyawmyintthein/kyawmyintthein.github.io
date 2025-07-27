@@ -45,7 +45,7 @@ jobs:
           echo "Build timestamp: $(date)" > static/build-info.txt
           echo "Commit hash: ${{ github.sha }}" >> static/build-info.txt
           echo "Workflow run: ${{ github.run_number }}" >> static/build-info.txt
-          hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/" --cleanDestinationDir --verbose
+          hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/" --cleanDestinationDir
           echo "Build completed at $(date)"
 
       - name: List build output
