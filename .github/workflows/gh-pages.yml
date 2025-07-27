@@ -3,7 +3,8 @@ name: Deploy Hugo site to GitHub Pages
 on:
   push:
     branches:
-      - master  # Your repository uses master, not main
+      - master
+  workflow_dispatch:  # Allow manual triggering
 
 jobs:
   deploy:
@@ -15,6 +16,9 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    concurrency:
+      group: "pages"
+      cancel-in-progress: true
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -44,10 +48,15 @@ jobs:
           echo "Deployment timestamp: $(date)" > static/deployment-check.txt
           echo "Commit: ${{ github.sha }}" >> static/deployment-check.txt
           echo "Run number: ${{ github.run_number }}" >> static/deployment-check.txt
+          echo "Workflow: Custom Hugo Deployment" >> static/deployment-check.txt
+          # Ensure .nojekyll exists to prevent GitHub Jekyll processing
+          touch static/.nojekyll
           hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/" --cleanDestinationDir
           echo "Build completed at $(date)"
           echo "Generated files:"
           ls -la ./public/
+          echo "Checking for .nojekyll:"
+          ls -la ./public/.nojekyll || echo ".nojekyll not found - this might cause issues"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
