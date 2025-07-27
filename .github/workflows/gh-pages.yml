@@ -42,6 +42,8 @@ jobs:
       - name: Build
         run: |
           echo "Building Hugo site..."
+          echo "Build timestamp: $(date)" > static/build-info.txt
+          echo "Commit hash: ${{ github.sha }}" >> static/build-info.txt
           hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/" --cleanDestinationDir
           echo "Build completed at $(date)"
 
