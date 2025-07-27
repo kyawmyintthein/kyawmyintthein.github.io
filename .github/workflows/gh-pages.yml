@@ -1,28 +1,26 @@
-name: GitHub Pages
+name: Deploy Hugo site to GitHub Pages
 
 on:
   push:
     branches:
-      - master  # Set a branch to deploy
+      - master  # Your repository uses master, not main
 
 jobs:
   deploy:
-    runs-on: ubuntu-22.04
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       pages: write
       id-token: write
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
-      cancel-in-progress: true
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
-          submodules: true  # Fetch Hugo themes (true OR recursive)
-          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+          submodules: true  # Fetch Hugo themes
+          fetch-depth: 0
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
@@ -34,26 +32,8 @@ jobs:
         id: pages
         uses: actions/configure-pages@v4
 
-      - name: Clean and prepare build
-        run: |
-          rm -rf ./public
-          echo "Cleaned public directory"
-
       - name: Build
-        run: |
-          echo "Building Hugo site..."
-          echo "Build timestamp: $(date)" > static/build-info.txt
-          echo "Commit hash: ${{ github.sha }}" >> static/build-info.txt
-          echo "Workflow run: ${{ github.run_number }}" >> static/build-info.txt
-          hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/" --cleanDestinationDir
-          echo "Build completed at $(date)"
-
-      - name: List build output
-        run: |
-          echo "Contents of public directory:"
-          ls -la ./public/
-          echo "Sample of index.html:"
-          head -20 ./public/index.html || echo "No index.html found"
+        run: hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -62,5 +42,4 @@ jobs:
 
       - name: Deploy to GitHub Pages
         id: deployment
-        if: github.ref == 'refs/heads/master' && success()
         uses: actions/deploy-pages@v4
