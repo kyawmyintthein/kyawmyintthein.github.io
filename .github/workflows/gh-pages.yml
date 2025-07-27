@@ -32,8 +32,17 @@ jobs:
         id: pages
         uses: actions/configure-pages@v4
 
+      - name: Clean all generated content
+        run: |
+          rm -rf ./public
+          rm -rf ./resources/_gen
+          echo "Cleaned all generated content and caches"
+
       - name: Build
-        run: hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+        run: |
+          echo "Building Hugo site with timestamp: $(date)"
+          hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/" --cleanDestinationDir
+          echo "Build completed at $(date)"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
