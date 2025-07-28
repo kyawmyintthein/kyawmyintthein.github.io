@@ -47,15 +47,15 @@ defaultContentLanguage = "en"
     name = "email"
     url = "mailto:kyawmyintthein2020@gmail.com"
 
-  # Profile mode with Burmese Gopher
+  # Profile mode with profile photo
 [params.profileMode]
   enabled = true
   title = "Kyaw Myint Thein (Joe)"
   subtitle = "Senior Software Engineer from Myanmar, currently living in Sydney. Sharing thoughts on technology, life, and everything in between."
-  imageUrl = "/images/burmese-gopher.png"
-  imageWidth = 160
-  imageHeight = 160
-  imageTitle = "Burmese Gopher - Joe's Avatar"
+  imageUrl = "/images/profile-square.jpg"
+  imageWidth = 240
+  imageHeight = 240
+  imageTitle = "Joe's Profile Photo"
 
   # Profile mode buttons
   [[params.profileMode.buttons]]

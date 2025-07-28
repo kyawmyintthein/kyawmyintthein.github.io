@@ -65,9 +65,9 @@ This blog covers a mix of topics close to my heart:
 - Books, movies, and random musings
 - Anything that catches my interest
 
-## Why "Burmese Gopher"?
+## Personal Touch
 
-You might notice the gopher mascot around the site. As someone from Myanmar working extensively with Go (Golang), I thought it was a fun way to represent my identity – a **Burmese Gopher** navigating the world of technology and life in a new country.
+This blog is my digital space where I blend my professional journey with personal experiences. Moving from Myanmar to Australia has been an incredible adventure, and I want to share both the technical insights I've gained and the life experiences that have shaped me.
 
 ## Beyond Code
 
