@@ -1,7 +1,7 @@
 ---
 title: "Home"
-description: "Kyaw Myint Thein (Joe) - Senior Software Engineer"
+description: "Kyaw Myint Thein (Joe) - Personal Blog"
 ---
 
-<!-- This page now uses Profile Mode with the Burmese Gopher icon -->
-<!-- Content is managed through config.toml profileMode settings -->
+<!-- This page uses Profile Mode with the Burmese Gopher icon -->
+<!-- Personal blog sharing technology, life experiences, and thoughts from Sydney -->

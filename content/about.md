@@ -1,6 +1,6 @@
 ---
 title: "About"
-description: "About Kyaw Myint Thein - Senior Software Engineer"
+description: "About Kyaw Myint Thein (Joe) - Software Engineer, Myanmar expat in Sydney"
 showToc: false
 TocOpen: false
 hidemeta: false
@@ -12,78 +12,99 @@ ShowBreadCrumbs: true
 ShowPostNavLinks: false
 ---
 
-# About Me
+# Hello! 👋
 
-Hello! I'm **Kyaw Myint Thein (Joe)**, a Senior Software Engineer with expertise in large-scale distributed systems and data infrastructure. I'm currently based in **Sydney, Australia**.
+Hello! I'm **Kyaw Myint Thein**, but most people call me **Joe**. I'm a Senior Software Engineer originally from **Myanmar** (Burma), currently living in **Sydney, Australia**.
 
-## Current Focus
+This blog is my personal corner of the internet where I share thoughts on technology, experiences as an immigrant, life in Sydney, and anything else that sparks my curiosity.
 
-I'm currently working as a **Senior Software Engineer** focusing on optimizing large-scale data infrastructure and storage solutions for e-commerce technology platforms.
+## My Journey
 
-### What I Do
-- **Lead real-time data processing efforts** by building ETL jobs, business credential pipelines, and scalable data solutions
-- **Manage and evolve Apache Iceberg-based DataLakes**, enabling robust data ingestion for machine learning, reporting, and product analytics
-- **Operate and fine-tune large-scale Cassandra clusters**, ensuring high availability, low latency, and seamless scalability
-- **Spearhead database migrations** of high-throughput, latency-sensitive applications, powering millions of daily requests with minimal disruption
-- **Build and maintain internal tools** that streamline database operations and simplify integrations for engineering teams
+I moved to Australia for opportunities and to experience life in a different part of the world. It's been quite the adventure – from navigating cultural differences to building complex software systems, every day brings something new to learn.
 
-### Experience Summary
-I have **6+ years** of experience working across diverse industries including e-commerce technology, gaming & hardware platforms, and telecommunications. My background includes:
+## What I Do Professionally
 
-- **E-commerce Technology**: Large-scale data infrastructure optimization and storage solutions
-- **Gaming & Hardware Platforms**: Cloud services handling 200+ million users with 30+ million daily active users, building high-traffic applications with Golang, RPC frameworks, Cassandra, MySQL, and AWS
-- **Telecommunications**: Platform engineering for mobile virtual network operators, implementing critical microservices like User Identity Service, Localization & Configuration Service, and API Gateways
+I work as a **Senior Software Engineer** focusing on large-scale data infrastructure and distributed systems. My day-to-day involves:
 
-Throughout my career, I've focused on replacing legacy systems with scalable microservices, leading complex database migrations, and introducing modern architecture patterns like API Gateways and RPC frameworks to improve performance and productivity.
+- Building and optimizing data processing pipelines
+- Managing Apache Iceberg-based DataLakes
+- Operating large-scale Cassandra clusters
+- Leading database migrations for high-traffic applications
+- Creating tools that make other engineers' lives easier
 
-## Technical Expertise
+### Technical Background
 
-### Core Technologies
-- **Languages**: Scala, Golang, Java, Python
-- **Databases**: Apache Cassandra, MySQL, DynamoDB
-- **Data Processing**: Apache Iceberg, Apache Kafka, Apache Spark
-- **Cloud**: AWS (extensive experience across multiple services)
-- **Architecture**: Microservices, ETL Pipelines, API Gateways
+- **6+ years** in software engineering across e-commerce, gaming, and telecommunications
+- Experience with systems handling **200+ million users** and **10,000+ RPS**
+- Specialized in **Scala, Golang, Java, Python**
+- Deep expertise in **Apache Cassandra, Kafka, Spark, Iceberg, and AWS**
+- **Distributed Systems** and **Data Platform Services** specialist
 
-### Specializations
-- **Large-Scale Systems**: Operating systems handling 10,000+ RPS across thousands of microservices
-- **Data Infrastructure**: Real-time data processing, DataLake management, ETL pipelines
-- **Database Management**: Cassandra cluster operations, performance tuning, migration strategies
-- **High-Traffic Applications**: Systems handling millions of daily requests with minimal latency
-- **System Migration**: Legacy system modernization and distributed architecture design
+## What You'll Find Here
 
-## Professional Strengths
+This blog covers a mix of topics close to my heart:
 
-- **Scalability Focus**: Experienced in building systems that handle high throughput (10,000+ RPS)
-- **Performance Optimization**: Expert in reducing latency and improving system efficiency
-- **Migration Leadership**: Successfully led complex database and system migrations
-- **Team Collaboration**: Strong experience in cross-functional team environments
-- **Problem Solving**: Proven track record of solving complex distributed systems challenges
+### 🔧 Technology & Engineering
 
-## Mission
+- Distributed systems and database engineering
+- Real-world experiences with large-scale systems
+- Programming insights and best practices
+- Tech industry observations
 
-Through this blog, I aim to share insights from working with large-scale distributed systems, data infrastructure, and modern software engineering practices. I'm particularly passionate about:
+### 🌏 Life & Culture
 
-- **Distributed Systems Architecture** - Sharing patterns and practices from real-world implementations
-- **Database Engineering** - Apache Cassandra, performance optimization, and migration strategies
-- **Data Infrastructure** - ETL pipelines, DataLake design, and real-time processing
-- **Software Engineering Excellence** - Best practices for building reliable, scalable systems
+- Experiences as a Myanmar expat in Australia
+- Cultural observations and adaptations
+- Life in Sydney - the good, the challenging, and the beautiful
+- Travel stories and local discoveries
 
-## Get In Touch
+### 💭 Personal Thoughts
 
-I'm always interested in discussing distributed systems, data infrastructure, and software engineering practices. Feel free to connect:
+- Career reflections and growth
+- Learning experiences and failures
+- Books, movies, and random musings
+- Anything that catches my interest
+
+## Why "Burmese Gopher"?
+
+You might notice the gopher mascot around the site. As someone from Myanmar working extensively with Go (Golang), I thought it was a fun way to represent my identity – a **Burmese Gopher** navigating the world of technology and life in a new country.
+
+## Beyond Code
+
+When I'm not debugging distributed systems or optimizing database queries, you might find me:
+
+- **Trekking and travelling**: Exploring new places and discovering hidden gems
+- **Road trips**: There's nothing like hitting the road and seeing where it takes you
+- **Cycling**: Pedaling around Sydney and exploring different neighborhoods
+- **Spending time with dogs**: I absolutely love dogs and can't resist saying hello to every pup I meet
+- **Trying to binge-watch Netflix**: Been attempting to get back into series over the past few months
+- **Reading**: From technical articles to books on various topics
+- **Exploring Sydney's food scene**: Still hunting for great Asian food - Japanese is my absolute favorite
+- **Planning the next adventure**: Whether it's a weekend getaway or a longer journey
+
+## Let's Connect
+
+I love connecting with fellow engineers, Myanmar expats, Sydney locals, or anyone with interesting stories to share:
 
 - **GitHub**: [github.com/kyawmyintthein](https://github.com/kyawmyintthein)
 - **LinkedIn**: [www.linkedin.com/in/kyaw-myint-thein](https://www.linkedin.com/in/kyaw-myint-thein)
+- **YouTube**: [Awesomely Weird Wanderers](https://www.youtube.com/@AwesomelyWeirdWanderers)
 - **Email**: [kyawmyintthein2020@gmail.com](mailto:kyawmyintthein2020@gmail.com)
 
-I'm particularly interested in conversations about:
-- Large-scale system architecture and design patterns
-- Database performance optimization and clustering
-- Data infrastructure and real-time processing systems
-- Career opportunities in distributed systems engineering
-- Mentoring and knowledge sharing in the tech community
+Feel free to reach out if you want to chat about:
+
+- Technology and software engineering
+- Life as an international worker in Australia
+- Myanmar culture or experiences
+- Sydney recommendations and travel tips
+- Trekking and road trip adventures
+- Cycling routes and neighborhood discoveries
+- Dog stories (I'd love to hear about your furry friends!)
+- Japanese food recommendations (always looking for the best spots!)
+- Book and Netflix recommendations
+- Career advice or mentoring
+- Or just to say hi!
 
 ---
 
-*"Building systems that scale is not just about technology - it's about understanding the problems we're solving and the people who will use our solutions."* 
+*"Life is a journey of continuous learning – whether you're debugging code, adapting to a new culture, or simply figuring out the best coffee shop in your neighborhood."*

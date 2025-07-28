@@ -1,5 +1,5 @@
 baseURL = "https://kyawmyintthein.github.io/"
-title = "Kyaw Myint Thein | Tech Blog"
+title = "Kyaw Myint Thein | Personal Blog"
 theme = "PaperMod"
 copyright = "© 2024 Kyaw Myint Thein"
 languageCode = "en-us"
@@ -8,8 +8,8 @@ defaultContentLanguage = "en"
 # Global parameters
 [params]
   env = "production"
-  description = "Senior Software Engineer sharing insights on distributed systems, data infrastructure, and large-scale applications"
-  keywords = ["distributed-systems", "cassandra", "apache-iceberg", "kafka", "scala", "golang", "data-infrastructure", "myanmar"]
+  description = "Senior Software Engineer sharing insights on technology, life, travel adventures, and experiences from Sydney, Australia"
+  keywords = ["technology", "personal-blog", "travel", "trekking", "road-trips", "life-in-sydney", "software-engineering", "myanmar", "australia", "youtube"]
   author = "Kyaw Myint Thein"
 
   # Theme settings
@@ -40,6 +40,10 @@ defaultContentLanguage = "en"
     url = "https://www.linkedin.com/in/kyaw-myint-thein"
 
   [[params.socialIcons]]
+    name = "youtube"
+    url = "https://www.youtube.com/@AwesomelyWeirdWanderers"
+
+  [[params.socialIcons]]
     name = "email"
     url = "mailto:kyawmyintthein2020@gmail.com"
 
@@ -47,7 +51,7 @@ defaultContentLanguage = "en"
 [params.profileMode]
   enabled = true
   title = "Kyaw Myint Thein (Joe)"
-  subtitle = "Senior Software Engineer specializing in large-scale distributed systems and data infrastructure"
+  subtitle = "Senior Software Engineer from Myanmar, currently living in Sydney. Sharing thoughts on technology, life, and everything in between."
   imageUrl = "/images/burmese-gopher.png"
   imageWidth = 160
   imageHeight = 160
@@ -68,8 +72,8 @@ defaultContentLanguage = "en"
 
   # Home info mode (disabled when profile mode is enabled)
   [params.homeInfoParams]
-    Title = "Hi, I'm Kyaw Myint Thein 👋"
-    Content = "Senior Software Engineer specializing in large-scale distributed systems and data infrastructure. Sharing insights from building systems that serve hundreds of millions of users."
+    Title = "Hi, I'm Joe 👋"
+    Content = "Welcome to my personal space on the web! I'm a software engineer from Myanmar currently living in Sydney, sharing stories about technology, life experiences, and everything that catches my interest."
 
 # Navigation
 [[menu.main]]
