@@ -51,7 +51,7 @@ defaultContentLanguage = "en"
 [params.profileMode]
   enabled = true
   title = "Kyaw Myint Thein (Joe)"
-  subtitle = "Senior Software Engineer from Myanmar, currently living in Sydney. Sharing thoughts on technology, life, and everything in between."
+  subtitle = "Senior Software Engineer from Myanmar, currently living in Australia. Sharing thoughts on technology, life, and everything in between."
   imageUrl = "/images/profile-square.jpg"
   imageWidth = 240
   imageHeight = 240
