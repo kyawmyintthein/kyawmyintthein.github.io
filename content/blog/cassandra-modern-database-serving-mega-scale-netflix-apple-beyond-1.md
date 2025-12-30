@@ -9,10 +9,10 @@ description: "Deep dive into Apache Cassandra's architecture, exploring how it o
 # Cassandra: The Modern Database Serving Mega-Scale at Netflix, Apple, and Beyond (1)
 
 ## Introduction
-ကျွန်တော် DynamoDB နဲ့ အလုပ်လုပ်ခဲ့တဲ့ အတွေ့အကြုံ၊ Kubernetes ပေါ်မှာ Cassandra clusters တွေ host ခဲ့တဲ့ အတွေ့အကြုံတွေအပေါ် အခြေခံပြီး modern NoSQL databases တွေအကြောင်း deep dive ဆင်းကြည့်ကြတာပေါ့။ Cassandra က ပြောစရာ concept တွေ တော်တော်များလို့ ဒါကို ပထမဆုံး series အနေနဲ့ စလိုက်ပါတယ်။
+ကျွန်တော် DynamoDB နဲ့ အလုပ်လုပ်ခဲ့တဲ့ အတွေ့အကြုံ၊ Kubernetes ပေါ်မှာ in-house Cassandra clusters တွေ host ခဲ့တဲ့ အတွေ့အကြုံတွေအပေါ် အခြေခံပြီး modern NoSQL databases တွေအကြောင်း deep dive ဆင်းကြည့်ကြတာပေါ့။ Cassandra က ပြောစရာ concept တွေ တော်တော်များလို့ ဒါကို ပထမဆုံး series အနေနဲ့ စလိုက်ပါတယ်။
 
 ## What is Cassandra?
-**Apache Cassandra** ဆိုတာ open-source, distributed NoSQL database တစ်ခုပါ။ သူက high write throughput ရဖို့၊ massive scale လုပ်နိုင်ဖို့နဲ့ continuous availability အတွက် built ဖြစ်ပြီးသားပါ။ 
+**Apache Cassandra** ဆိုတာ open-source, distributed NoSQL database တစ်ခုပါ။ သူက high write throughput ရဖို့၊ massive scale လုပ်နိုင်ဖို့နဲ့ continuous availability အတွက် built ဖြစ်ပြီးသားပါ။ Cassandra က data တွေကို tables, rows, နဲ့ columns တွေနဲ့ သိမ်းဆည်းပါတယ်။
 
 Traditional databases တွေနဲ့မတူတာက Cassandra က **peer-to-peer architecture** ကို သုံးထားပြီး **tunable consistency** ပေးထားပါတယ်။ ဆိုလိုတာက developer က ကိုယ့် system ရဲ့ data accuracy နဲ့ speed ကြားမှာ trade-off ကို စိတ်ကြိုက် balance လုပ်လို့ရတယ်။ AWS DynamoDB ကို သုံးဖူးရင်တော့ core principles တွေက တော်တော်လေး ဆင်တာကို တွေ့ရမှာပါ။
 
@@ -20,13 +20,31 @@ Traditional databases တွေနဲ့မတူတာက Cassandra က **peer-
 
 ## How is it different from a traditional RDBMS?
 
-MySQL ဒါမှမဟုတ် PostgreSQL လိုမျိုး traditional RDBMS တွေမှာ ပုံမှန်အားဖြင့် queries တွေအကုန်လုံးကို handle လုပ်တဲ့ single instance တစ်ခုပဲ ရှိတတ်ပါတယ်။ Cassandra ကတော့ design စွဲကတည်းက queries တွေကို handle လုပ်ဖို့ node (instance) တစ်ခုထက်မက သုံးဖို့ ရည်ရွယ်ထားတာပါ။ 
+MySQL ဒါမှမဟုတ် PostgreSQL လိုမျိုး traditional RDBMS တွေမှာ ပုံမှန်အားဖြင့် queries တွေအကုန်လုံးကို handle လုပ်တဲ့ primary instance တစ်ခုပဲ ရှိတတ်ပါတယ် (RDBMS တွေမှာ advanced features တွေ အများကြီးရှိပေမဲ့ ဒါကို နောက်မှ ဆွေးနွေးပါမယ်)။ Cassandra ကတော့ design စွဲကတည်းက queries တွေကို handle လုပ်ဖို့ node (instance) တစ်ခုထက်မက သုံးဖို့ ရည်ရွယ်ထားတာပါ။ Features တွေ ဒါမှမဟုတ် architecture အရ ကွာခြားချက်တွေ အများကြီးရှိပေမဲ့ ဒီအခြေခံကနေပဲ စကြည့်ရအောင်။
 
 * **RDBMS:** Single node ကနေ စတင်ပြီး Vertical Scaling ကို အားကိုးပါတယ်။
 * **Cassandra:** Distributed multiple nodes ကနေ စတင်ပြီး Horizontal Scaling ကို အားကိုးပါတယ်။
 
-### Peer-to-Peer vs. Master-Slave
-Database အများစု (MongoDB, MySQL, Postgres) က **Master-Slave (Primary-Replica)** architecture ကို သုံးပါတယ်။ Writes တွေက Primary ဆီပဲသွားတဲ့အတွက် write-heavy apps တွေမှာ Primary node က bottleneck ဖြစ်လာပါတယ်။ Cassandra ရဲ့ **Peer-to-Peer** architecture မှာတော့ node တိုင်းက read ရော write requests တွေကိုပါ လက်ခံနိုင်ပါတယ်။
+### Cassandra's Core Idea: Continuous Availability
+
+စဥ်းစားကြည့်ပါ - သင့် RDBMS database က machine (computer) တစ်ခုပေါ်မှာ run နေပြီး application က အဲဒီ machine ကို အားကိုးနေတယ်ဆိုပါစို့။ တကယ်လို့ အဲဒီ machine က အကြောင်းတစ်ခုခုကြောင့် down သွားရင် application က unavailable ဖြစ်သွားပါလိမ့်မယ်။ Backup မရှိရင် data တွေ ပျောက်နိုင်ပါတယ်။ Backup ရှိတယ်တောင် restore လုပ်ဖို့ အချိန်ယူရပြီး downtime ရှည်သွားမှာပါ။
+
+ဒါပေမဲ့ database က multiple nodes (computers) တွေပေါ်မှာ run နေရင်ရော? Node တစ်ခု down သွားတယ်တောင် database က available ဖြစ်နေဦးမှာပါ။ ဒါကြောင့် Cassandra က **continuous availability** ကို guarantee လုပ်နိုင်တာပါ။
+
+### Cassandra's Core Idea: True Horizontal Scalability
+
+သင့် application မှာ Facebook, Netflix လို customers အများကြီးရှိတယ်ဆိုပါစို့။ Machine တစ်ခုတည်းပေါ်က database က scale လုပ်လို့ မရတော့ပါဘူး။ Vertically scale up လုပ်လို့ရပါတယ် (bigger machine - more CPUs, Memory စတာတွေ သုံးတာ) ဒါပေမဲ့ တစ်နေ့တော့ limit ကို ထိသွားမှာပါ။ Applications တွေအတွက် horizontal scaling (adding more nodes/machines) က အမြဲတမ်း ပိုကောင်းပါတယ်။ Databases တွေအတွက်လည်း အတူတူပါပဲ (database က application တစ်ခုပါပဲ)။ ဒါကြောင့် Cassandra က အမှန်တကယ် scalable ဖြစ်တာပါ။
+
+ဒါပေမဲ့ multiple nodes ရှိလို့နဲ့ အလိုအလျောက် scale လုပ်မှာ မဟုတ်ပါဘူး။ Cassandra က scalability ရအောင် tricks အများကြီး သုံးထားပါတယ်။
+
+### Scalability: Peer-to-Peer vs. Master-Slave
+Database အများစု (MongoDB, MySQL, Postgres) က **Master-Slave (Primary-Replica)** architecture ကို သုံးပါတယ်။ Writes တွေက Primary ဆီပဲသွားတဲ့အတွက် write-heavy apps တွေမှာ Primary node က bottleneck ဖြစ်လာပါတယ်။ Read-heavy applications တွေအတွက်တော့ ဒီ architecture က အလုပ်ဖြစ်ပါတယ်။ ဒါပေမဲ့ write-heavy workloads တွေအတွက်တော့ တစ်နေ့တော့ Primary က scale လုပ်လို့ မရတော့ပါဘူး။
+
+Cassandra ရဲ့ **Peer-to-Peer** architecture မှာတော့ node တိုင်းက read ရော write requests တွေကိုပါ လက်ခံနိုင်ပါတယ်။ ဒါကြောင့် write scalability ကို အမှန်တကယ် ရရှိနိုင်တာပါ။
+
+**ဒါပေမဲ့ peer-to-peer architecture က အလွယ်တကူ implement လုပ်လို့ရတာ မဟုတ်ပါဘူး။** Write query က node အားလုံးဆီ သွားရင် scalable မဖြစ်တော့ပါဘူး။ Random nodes တွေမှာ write လုပ်လို့လည်း မရပါဘူး - ဘာကြောင့်လဲဆိုတော့ နောက်မှ ဘယ်မှာ read လုပ်ရမလဲဆိုတာ မသိတော့လို့ပါ။
+
+**ဒါကြောင့် အဓိက မေးခွန်းက:** ဘယ် node က ဘယ် data ကို သိမ်းမလဲဆိုတာ ဘယ်လို ဆုံးဖြတ်မလဲ? Cassandra က ဒါကို ဘယ်လို design လုပ်ထားလဲ?
 
 {{< mermaid >}}
 graph TB
@@ -54,9 +72,9 @@ graph TB
 
 ---
 
-## How Cassandra Organizes Data
+## How Cassandra Store Data
 
-Cassandra မှာ Data တွေကို Node တွေပေါ်မှာ စနစ်တကျ ခွဲဝေသိမ်းဆည်းဖို့ **Consistent Hashing** ဆိုတဲ့ Concept ကို အသုံးပြုပြီး အဓိက အစိတ်အပိုင်း (၃) ခုနဲ့ အလုပ်လုပ်ပါတယ်။
+Cassandra မှာ Data တွေကို Node တွေပေါ်မှာ စနစ်တကျ ခွဲဝေသိမ်းဆည်းဖို့ **Consistent Hashing** ဆိုတဲ့ Concept ကို အသုံးပြုပြီး အဓိက အစိတ်အပိုင်း (၃) ခုနဲ့ အလုပ်လုပ်ပါတယ်။ ဒါတွေက Cassandra ရဲ့ distributed architecture ရဲ့ အခြေခံ building blocks တွေပါ။
 
 {{< mermaid >}}
 graph LR
@@ -76,19 +94,29 @@ graph LR
 
 ## 1. Nodes (The Physical Layer)
 - Data တွေကို အမှန်တကယ် Store လုပ်မယ့် Physical Server (သို့မဟုတ်) Virtual Machine တွေကို ခေါ်တာပါ။
+- ဥပမာ - EC2 instances တစ်ခု ဒါမှမဟုတ် computers အစုတစ်ခု ဖြစ်နိုင်ပါတယ်။
 
 ## 2. The Ring (The Logical Layer)
-- Cassandra Cluster ထဲမှာရှိတဲ့ Node အားလုံးကို စက်ဝိုင်းပုံစံ တန်းစီထားတယ်လို့ စိတ်ကူးကြည့်ပါ။
+- Cassandra Cluster ထဲမှာရှိတဲ့ Node အားလုံးကို စက်ဝိုင်းပုံစံ တန်းစီထားတယ်လို့ စိတ်ကူးကြည့်ပါ။ ဒါက math concept တစ်ခု ပါ။
 - ဒီ **Ring Architecture** ကြောင့် Data တွေကို ဘယ် Node မှာမဆို အလွယ်တကူ ရှာဖွေနိုင်ပြီး Cluster ကို **Scale out** လုပ်ရတာ လွယ်ကူစေပါတယ်။
+- Ring က circular ဖြစ်တဲ့အတွက် အစနဲ့ အဆုံး မရှိပါဘူး - wraps around လုပ်ပါတယ်။
 
 ## 3. Tokens & Ranges (The Distribution Logic)
 - Data တစ်ခု (Row) ဝင်လာရင် Cassandra က **Partition Key** ကိုယူပြီး **Hash function (Murmur3 Algorithm)** နဲ့ တွက်ချက်လိုက်ပါတယ်။ ထွက်လာတဲ့ Hash value ကို **Token** လို့ ခေါ်ပါတယ်။
-- **Token Range:** Ring တစ်ခုလုံးကို အပိုင်းအခြား (Ranges) တွေ ခွဲထားပါတယ်။
+- **Token Range:** Ring တစ်ခုလုံးကို အပိုင်းအခြား (Ranges) တွေ ခွဲထားပါတယ်။ Token တွေက ownership boundaries တွေကို သတ်မှတ်ပေးပါတယ်။
 - **Ownership:** Node တစ်ခုချင်းစီက သတ်မှတ်ထားတဲ့ **Token Range** တစ်ခုကို တာဝန်ယူရပါတယ်။
-   - **Clockwise Traversal:** Ownership ကို သတ်မှတ်ရာမှာ **လက်ယာရစ် (Clockwise) အတိုင်း** ကြည့်ပါတယ်။ Node တစ်ခုဟာ ရှေ့က node ရဲ့ token နောက်ပိုင်းကနေ သူ့ရဲ့ ကိုယ်ပိုင် token အထိ range ကို **ပိုင်ဆိုင် (Own)** တာ ဖြစ်ပါတယ်။
+   - **Clockwise Traversal:** Ownership ကို သတ်မှတ်ရာမှာ **လက်ယာရစ် (Clockwise) အတိုင်း** ကြည့်ပါတယ်။ Node တစ်ခုဟာ ရှေ့က node ရဲ့ token နောက်ပိုင်းကနေ သူ့ရဲ့ ကိုယ်ပိုင် token အထိ range ကို **ပိုင်ဆိုင်** တာ ဖြစ်ပါတယ်။
 
 ### Logical Example (Token Ranges & Ownership)
-နားလည်ရလွယ်အောင် Ring တစ်ခုလုံးမှာ **Token အကွာအဝေး 0 to 100** ရှိတယ်လို့ ယူဆကြည့်ရအောင်။
+နားလည်ရလွယ်အောင် Ring တစ်ခုလုံးမှာ **Token အကွာအဝေး 0 to 100** ရှိတယ်လို့ ယူဆကြည့်ရအောင်။ ဒါက simplified example ပါ။ 
+
+**Ring:** 0 → 25 → 50 → 75 → 100 (wraps around back to 0)
+
+**Tokens (one per node):**
+- Node A → 25
+- Node B → 50
+- Node C → 75
+- Node D → 100
 
 | Node   | Assigned Token | Responsible Range (Ownership)          |
 |--------|----------------|---------------------------------------|
@@ -100,9 +128,18 @@ graph LR
 
 {{< cassandra-ring >}}
 
+### Virtual Nodes (VNodes) - Optional Concept
+**VNodes** ဆိုတာ Cassandra ရဲ့ နောက်ထပ် concept တစ်ခုပါ။ Node တစ်ခုနဲ့ token တစ်ခု 1:1 map လုပ်မယ့်အစား node တစ်ခုချင်းစီက small token ranges အများကြီးကို own လုပ်ပါတယ်။ အခုက simplicity အတွက် ဒီ concept ကို ခဏချန်ထားလိုက်ပါမယ် - cognitive load လျှော့ဖို့ပါ။ Advanced topics တွေမှာ ပြန်ရှင်းပြပါမယ်။
+
+---
+
 ## The Secret Sauce: The Partition Key
 
-Ring ထဲမှာ data ကို ရှာဖို့ Cassandra က သီးသန့် table schema သုံးပါတယ်။ Primary key မှာ အဓိက အစိတ်အပိုင်း နှစ်ခု ပါဝင်ပါတယ်:
+အခု ကျွန်တော်တို့ သိလာပြီ - ဘယ် physical nodes တွေက ဘယ် token ranges တွေကို own လုပ်တယ်ဆိုတာ။ ဒါပေမဲ့ Cassandra က ဒါတွေကို ဘယ်လို အသုံးချလဲဆိုတာ မသိသေးပါဘူး။
+
+Ring ထဲမှာ data ကို ရှာဖို့ Cassandra က သီးသန့် table schema သုံးပါတယ်။ Cassandra table မှာ အဓိက component နှစ်ခု ရှိရမယ်: **partition key** နး့ **clustering (sort) key**။ ဒီ keys နှစ်ခု ပေါင်းလို့ table အတွက် primary key ဖြစ်သွားပါတယ်။ Partition key မှာရော clustering key မှာရော columns အများကြီး ပါလို့ရပါတယ်။
+
+Primary key မှာ အဓိက အစိတ်အပိုင်း နှစ်ခု ပါဝင်ပါတယ်:
 
 * **Partition Key:** ဘယ် node မှာ data သွားသိမ်းမလဲဆိုတာ ဆုံးဖြတ်ပေးပါတယ်။
 * **Clustering Key:** အဲဒီ node ထဲမှာ data တွေကို ဘယ်လို sort လုပ်မလဲဆိုတာ ဆုံးဖြတ်ပါတယ်။
@@ -186,7 +223,6 @@ Coordinator က ring topology ကို ကြည့်ပြီး token `62` �
 #### Step 3: Data Routing & Storage
 Coordinator (Node A) က data ကို **Node C** ဆီ forward လုပ်ပြီး Node C မှာ disk ပေါ် သွားရောက်သိမ်းဆည်းပါတယ်။ Write operation အောင်မြင်သွားတဲ့အခါ coordinator က client ဆီ success response ပြန်ပို့ပေးပါတယ်။
 
-> **Note:** Production မှာတော့ data က node တစ်ခုတည်းမှာပဲ သိမ်းမှာ မဟုတ်ပါဘူး။ **Replication Factor** ကြောင့် multiple nodes တွေမှာ copies တွေ သိမ်းပါတယ်။ ဒါကို series ရဲ့ နောက်ပိုင်းမှာ ဆွေးနွေးပါမယ်။
 
 ### Read Request Flow
 
@@ -257,6 +293,12 @@ graph TD
 
 **Partition Key** ဆိုတာ Cassandra ရဲ့ write ရော read request တွေအတွက်ပါ အသက်သွေးကြောပဲ ဖြစ်ပါတယ်။ တကယ်လို့ သင်က query မှာ partition key ကို ထည့်မပေးခဲ့ဘူးဆိုရင် Cassandra က data ဘယ်မှာရှိမှန်း မသိတော့ဘဲ node အားလုံးကို လိုက်မွှေရပါလိမ့်မယ်။ ဒါကို **Full Cluster Scan** လို့ ခေါ်ပြီး performance ကို အဆိုးရွားဆုံး ထိခိုက်စေပါတယ်။
 
+**ကျွန်တော်တို့ ယခု သိလာပြီ:**
+- Cassandra က data တွေကို multiple nodes တွေပေါ်မှာ ဘယ်လို organize လုပ်လဲ
+- Ring topology နဲ့ token ranges တွေက ဘယ်လို အလုပ်လုပ်လဲ
+- Partition key က data ရဲ့ location ကို ဘယ်လို determine လုပ်လဲ
+- Write နဲ့ read requests တွေက ring မှာ ဘယ်လို route လုပ်လဲ
+
 {{< mermaid >}}
 graph LR
     subgraph "With Partition Key ✓"
@@ -283,7 +325,7 @@ graph LR
 
 ## Next Topic: Resilience & Consistency
 
-အခု logic အတိုင်းဆိုရင် data က node တစ်ခုတည်းမှာပဲ သွားသိမ်းတာ မဟုတ်လား? အဲဒီ node သာ down သွားရင် ကျွန်တော်တို့ data တွေ ပျောက်ကုန်မှာလား? 
+အခု logic အတိုင်းဆိုရင် data က node တစ်ခုတည်းမှာပဲ သွားသိမ်းတာ မဟုတ်လား? အဲဒီ node သာ down သွားရင် ကျွန်တော်တို့ data တွေ ပျောက်ကုန်မှာလား? ကျွန်တော် အစောပိုင်းမှာ Cassandra က highly available ဖြစ်တယ်လို့ ပြောခဲ့တယ်။ ဒါက ဘာကို ဆိုလိုတာလဲ?
 
 ဒီအကြောင်းအရာတွေကိုတော့ နောက်ဆောင်းပါးမှာ **Replication Factor** နဲ့ **Tunable Consistency** အကြောင်းတွေနဲ့အတူ အသေးစိတ် ဆက်လက်ဆွေးနွေးသွားပါမယ်။
 
