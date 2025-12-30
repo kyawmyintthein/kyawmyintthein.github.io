@@ -57,6 +57,13 @@ defaultContentLanguage = "en"
   imageHeight = 240
   imageTitle = "Joe's Profile Photo"
 
+  # Enable Mermaid diagrams
+  [params.assets]
+    disableFingerprinting = false
+  
+  [params.mermaid]
+    enable = true
+
   # Profile mode buttons
   [[params.profileMode.buttons]]
     name = "Blog"
